@@ -1,7 +1,7 @@
 <template>
-  <div>
-      hola
-  </div>
+    <div>
+        hola
+    </div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
     },
     methods: {
         infodelcamp () {
-            API.peticion()
+            API.peticion('https://render-delcamp.onrender.com/clientes')
                 .then(res => {
                     console.log(res)
                 })

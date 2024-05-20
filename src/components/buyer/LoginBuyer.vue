@@ -20,8 +20,8 @@
                 <input v-model="password" class="user-password" type="password" id="campoContraseña" placeholder="********">
 
                 <button class="btn-register" @click="infoenviar">Iniciar Sesión</button>
-                <p>¿Aun no tienes una cuenta? <a href="/Components/Login-Register-User/user_register.html">Registrate</a>
-                </p>
+                <p>¿Aun no tienes una cuenta? <router-link to="/register-buyer">Registrate</router-link></p>
+
                 <p>Olvidaste tu contraseña? <a href="#">Recuperar Contraseña</a></p>
                 <p id="TrueFormulario"></p>
             </form>
@@ -37,29 +37,29 @@ import API from '@/api'
             return{
                 data: null,
                 email: null,
-                password: null,
+                password: null
             }
         },
         methods: {
         infodelcamp () {
-            let a = API.peticion('https://render-delcamp.onrender.com/clientes')
-            console.log(a);
+            API.peticion('https://render-delcamp.onrender.com/clientes')
+                .then(res => {
+                    console.log(res)
+                })
         },
-
         infoenviar () {
             API.enviar('https://render-delcamp.onrender.com/clientes', 
                 {
                 correo: this.email,
                 contraseña:this.password} 
             )
-   
-                }
+        }
     },
 
     mounted () {
         this.infodelcamp()
     }
-    }
+}
 </script>
 
 <style scoped>
