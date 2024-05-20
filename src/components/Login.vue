@@ -42,8 +42,10 @@ import API from '@/api'
         },
         methods: {
         infodelcamp () {
-            let a = API.peticion('https://render-delcamp.onrender.com/clientes')
-            console.log(a);
+            API.peticion('https://render-delcamp.onrender.com/productos')
+            .then((respose) => {
+                console.log(respose)
+            })
         },
 
         infoenviar () {
