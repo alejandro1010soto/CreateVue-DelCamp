@@ -22,7 +22,29 @@ const enviar = function (URL, info) {
     })
 }
 
+
+const ValidationUser = function (URL, parameters) {
+    return new Promise((resolve, reject) => {
+        Vue.http.get(URL)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                const user = data.find((user) => user.correo === parameters.email && user.password === parameters.password);
+                if (user) {
+                    let IdActuallyFound = user.id;
+                    console.log(IdActuallyFound)
+                    this.$router.push('/ProfileFarmer?IdActually=' + IdActuallyFound); 
+                } else {
+                    console.log("Usuario no encontrado o contraseña incorrecta");
+                    resolve(false);
+                }
+            })
+            .catch((error) => reject(error));
+    });
+}
+
 export default {
     peticion,
-    enviar
+    enviar,
+    ValidationUser,
 }

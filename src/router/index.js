@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import helloword from '../components/HelloWorld.vue'
 import Login from '../components/Login.vue'
+import LoginFarmerVue from '@/components/Farmer/LoginFarmer.vue'
+import ProfileFarmer from '@/components/Farmer/ProfileFarmer.vue'
 
 Vue.use(VueRouter)
 
@@ -29,7 +31,18 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/loginFarmer',
+    name: 'loginFar',
+    component: LoginFarmerVue
+  },
+  {
+    path: '/ProfileFarmer',
+    name: 'ProfileFarmer',
+    component: ProfileFarmer
   }
+  
 ]
 
 const router = new VueRouter({
