@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import helloword from '../components/HelloWorld.vue'
+import DelcampHeader from '../components/DelcampHeader.vue'
+import DelcampFooter from '../components/DelcampFooter.vue'
+import LandingPage from '../components/Landing-page.vue'
 import Login from '../components/Login.vue'
 import LoginFarmerVue from '@/components/Farmer/LoginFarmer.vue'
 import ProfileFarmer from '@/components/Farmer/ProfileFarmer.vue'
@@ -11,14 +12,21 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/Landing-page',
+    name: 'Landing-page',
+    component: LandingPage
+
   },
   {
-    path: '/Helloword',
-    name: 'home',
-    component: helloword
+    path: '/Delcampfooter',
+    name: 'Delcampfooter',
+    component: DelcampFooter
+
+  },
+  {
+    path: '/DelcampHeader',
+    name: 'DelcampHeader',
+    component: DelcampHeader
   },
   {
     path: '/about',
