@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <div v-if="data">
-        <pre>{{ data }}</pre>
-        </div>
-        <div class="container">
+    <div class="principal">
+        <div class="tarjeta">
             <i class="fa-solid fa-user"></i>
-            <h2>Inicio de Sesión</h2>
-            <form class="user-form">
+            <div class="imagen">.</div>
+            <form class="formulario">
+                <h1>Inicio de Sesión</h1>
                 <label for="user-type">Tipo de usuario</label>
                 <select class="user-type" id="user_type">
                     <option disabled selected value="0">Tipo de usuario</option>
@@ -19,10 +17,10 @@
                 <label for="user-password">Contraseña</label>
                 <input v-model="password" class="user-password" type="password" id="campoContraseña" placeholder="********">
 
-                <button class="btn-register" @click="infoenviar">Iniciar Sesión</button>
-                <p>¿Aun no tienes una cuenta? <router-link to="/register-buyer">Registrate</router-link></p>
+                <button class="btn-register" @click.prevent="ValidarData">Iniciar Sesión</button>
+                <p>¿Aun no tienes una cuenta? <router-link class="rutas" to="/register-buyer">Registrate</router-link></p>
 
-                <p>Olvidaste tu contraseña? <a href="#">Recuperar Contraseña</a></p>
+                <p>Olvidaste tu contraseña? <router-link class="rutas" to="#">Recuperar Contraseña</router-link></p>
                 <p id="TrueFormulario"></p>
             </form>
         </div>
@@ -32,7 +30,7 @@
 <script>
 import API from '@/api'
     export default{
-        name:"miTercerComponente",
+        name:"LoginBuyer",
         data(){
             return{
                 data: null,
@@ -44,18 +42,34 @@ import API from '@/api'
         infodelcamp () {
             API.peticion('https://render-delcamp.onrender.com/clientes')
                 .then(res => {
-                    console.log(res)
-                })
+                    this.data = res
+                    console.log(this.data)
+            })
         },
-        infoenviar () {
-            API.enviar('https://render-delcamp.onrender.com/clientes', 
-                {
-                correo: this.email,
-                contraseña:this.password} 
-            )
+        ValidarData() {
+            let contador = 5; 
+                    this.data.forEach(element => {
+                        if(this.email === element.correo && this.password === element.contraseña) {
+                        alert('Ingresaste ', element.nombre)
+                                // $router.push('../leanding_page.html?IdUserLogin=' + element.id)
+                                window.location.reload()
+                    }
+                    if (this.email != element.correo || this.password != element.contraseña) {
+                    console.log('No ingresaste')
+                    let interval = setInterval(() => {
+                    contador--
+                    if (contador === 0) {
+                        clearInterval(interval)
+                        window.location.reload()
+                    } else {
+                        document.getElementById('TrueFormulario').innerHTML = `
+                        <h3>Correo o Contraseña Incorrecta</h3>
+                        <p>Recarga en ${contador} segundos</p>`
+                    }
+                }, 1000);
+            }})
         }
-    },
-
+},
     mounted () {
         this.infodelcamp()
     }
@@ -65,43 +79,68 @@ import API from '@/api'
 <style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f0f0;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+*{
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
 }
 
-.container {
-    width: 400px;
-    margin: 50px;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 2rem;
-    background-color: #fff;
+.principal{
+    background-size: cover;
+    background-color: #ffffff;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.fa-solid.fa-circle-arrow-left {
-    font-size: 5vh;
-    margin: 20px;
-    color: #0ac763;
+.body {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background-color: #fac55452;
 }
 
 .fa-solid.fa-user {
     font-size: 20vh;
-    color: #0ac763;
-    border: 5px #0ac763 solid;
+    color: #ffffff;
+    background-color: #0ac763;
+    border: 10px #0ac763 solid;
     overflow: hidden;
     padding: 20px 20px 0px 20px;
     border-radius: 50%;
+    position: absolute;
+    top: 20%;
 }
 
-.container h2 {
-    margin: 10px 0;
-    color: #0ac763;
+.tarjeta {
+    margin-left: 38%;
+    transform: translateY(0%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f5f5f5;
+    width: 500px;
+    border-radius: 2rem;
+    box-shadow: 0px 0px 30px 15px #0000008c;
+    overflow: hidden;
+    padding-bottom: 40px;
+}
+
+.imagen {
+    background-image: url('https://media.istockphoto.com/id/543212762/es/foto/tractor-en-el-campo-de-primavera-relaciones-sean.jpg?s=612x612&w=0&k=20&c=ua9ZJb046xHKUDsRW2okFfKYJyNd12RMXZ8vESdjUHc=');
+    background-size: cover;
+    width: 700px;
+    height: 350px;
+    transform: rotate(9deg);
+    border-radius: 2rem 2rem 0px 0px;
+    position: relative;
+    bottom: 40px;
+    z-index: -1;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25%;
 }
 
 label {
@@ -112,6 +151,7 @@ label {
 input[type="password"], input[type="email"], input[type="text"]{
     width: 95%;
     padding: 8px;
+    background-color: #f5f5f5;
     margin-bottom: 10px;
     border-style: none;
     border-bottom: 2px solid #0ac763;
@@ -125,33 +165,24 @@ input:focus {
 select {
     width: 99.8%;
     padding: 8px;
+    background-color: #f5f5f5;
     border: 1px solid #ccc;
     border-style: none;
     border-bottom: 2px solid #0ac763;
     margin-bottom: 20px;
 }
 
-.terms-conditions{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    gap: 4.5%;
+h1 {
+    margin-bottom: 40px;
 }
-.notifications{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    gap: 35.5%;
-}
-.direct-message{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    gap: 14.5%;
+
+.rutas {
+    color: #0ac763;
+    text-decoration: none;
 }
 
 .btn-register {
-    margin: 5px;
+    margin: 25px;
     padding: 10px 60px;
     border: none;
     border-radius: 3px;

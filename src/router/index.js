@@ -32,7 +32,7 @@ const routes = [
     component: LoginBuyer
   },
   {
-    path: 'register-buyer',
+    path: '/register-buyer',
     name: 'register-buyer',
     component: RegisterBuyer
   }

@@ -3,14 +3,13 @@ import VueResource from 'vue-resource'
 Vue.use(VueResource)
 // import store from '../store'
 
-const peticion = function (URL) {
-    return Vue.http.get(URL)
-    .then((response)=> {
-        response.json()
-    })
-    .then((data) => {
-        return data;
-    })
+const peticion = function(URL) {
+    return new Promise((resolver, rechazar) => {
+        Vue.http.get(URL)
+            .then((response) => response.json())
+            .then((data) => resolver(data))
+            .catch((error) => rechazar(error))
+    });
 }
 
 const enviar = function (URL, info) {
