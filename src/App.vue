@@ -1,10 +1,6 @@
 <template>
   <div id="app">
-      <DelcampHeader/>
-      <landing-page/>
-      <router-view/>
-      <DelcampFooter/>
-    
+
   </div>
 </template>
 <script>

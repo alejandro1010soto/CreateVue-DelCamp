@@ -4,6 +4,9 @@ import DelcampHeader from '../components/DelcampHeader.vue'
 import DelcampFooter from '../components/DelcampFooter.vue'
 import LandingPage from '../components/Landing-page.vue'
 import Login from '../components/Login.vue'
+import LoginFarmerVue from '@/components/Farmer/LoginFarmer.vue'
+import ProfileFarmer from '@/components/Farmer/ProfileFarmer.vue'
+import RegisterFarmer from '@/components/Farmer/RegisterFarmer'
 
 Vue.use(VueRouter)
 
@@ -28,16 +31,29 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/loginFarmer',
+    name: 'loginFar',
+    component: LoginFarmerVue
+  },
+  {
+    path: '/ProfileFarmer',
+    name: 'ProfileFarmer',
+    component: ProfileFarmer
+  },
+  {
+    path: '/RegisterFarmer',
+    name: 'Register',
+    component: RegisterFarmer
   }
+  
 ]
 
 const router = new VueRouter({
