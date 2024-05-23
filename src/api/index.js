@@ -13,15 +13,13 @@ const peticion = function (URL) {
 
 
 const enviar = function (URL, info) {
-    console.log(info)
-    console.log(URL)
+    const {id , NameFarmer , nameHause , phone_number , anddress ,  description , password , correo} = info
     return Vue.http.post(URL, {
-        info
+        id, NameFarmer, nameHause, phone_number, anddress, description, password, correo
     })
         .then((response) => response.json())
         .then((data) => {
             console.warn("User already " , data);
-
         })
         .catch((error) => console.error(error))
 }
