@@ -1,5 +1,6 @@
 <template>
   <div>
+    <DelcampHeader :ProductosComprados="carrito"/>
     <div id="Reload_Noult_Api"></div>
 
     <section class="contenedor_ofertas">
@@ -11,17 +12,17 @@
             <div class="descuento"><p>45% DTO.</p></div>
             <div class="foto_producto"><img :src="item.foto" alt="" /></div>
             <div class="informacion_producto">
-              <div>
+              <div class="valores">
                 <h4 class="PrecioProducto">
-                  <b>{{ item.precio }}</b>
+                  <b>${{ item.precio }} COL</b>
                 </h4>
                 <br />
-                <p class="nombre_producto">{{ item.nombre_producto }}</p>
+                <p class="nombre_producto"><b>{{ item.nombre_producto }}</b></p>
                 <p class="descriptionElement">
                   <strong>{{ item.descripcion }}</strong>
                 </p>
               </div>
-              <button class="btnProductoAndres" onclick="Icon(${element.id})">
+              <button class="btnProductoAndres" @click="Icon(item.id)">
                 Agregar
               </button>
             </div>
@@ -35,8 +36,8 @@
     </section>
     <section class="lista_productos">
       <img src="../assets/image/lista_productos.png" alt="" />
-      <a :href="pdf" download="producto_delcamp.pdf"
-        ><button>Visualizar listado</button></a>
+      <a :href="pdf" target="_blank"
+        ><button>Ver listado de productos</button></a>
     </section>
     <section class="InfoDelcamp">
       <div class="mision">
@@ -83,75 +84,90 @@
     <section class="atencion">
       <img src="../assets/image/atencion.jpg" alt="" />
     </section>
+    <DelcampFooter/>
   </div>
 </template>
 
 <script>
-  import API from '@/api'
+import DelcampHeader from "./DelcampHeader.vue";
+import DelcampFooter from "./DelcampFooter.vue";
+import API from "@/api";
 export default {
+ components: {
+  DelcampHeader,
+  DelcampFooter
+ },
+  data() {
+    return {
+      pdf: "/productos/Producto_Delcamp.pdf",
+      productos: null,
+      cantidadProductos: 0,
+      contador_traslacion: 0,
+      total_productos: 0,
+      carrito: [],
+    };
+  },
 
-    data () {
-        return {
-          pdf: '/productos/Producto_Delcamp.pdf',
-          productos: null,
-          cantidadProductos: 0,
-          contador_traslacion: 0,
-          total_productos: 0,
+  computed: {
+    mover() {
+      return {
+        transform: `translate(${this.contador_traslacion}px`,
+      };
+    },
+  },
+  
+  methods: {
+    infodelcamp() {
+      API.peticion("https://render-delcamp.onrender.com/productos").then(
+        (res) => {
+          this.productos = res;
+          for (let index = 0; index <= this.productos.length; index++) {
+            this.cantidadProductos += 1;
+          }
+          this.total_productos = 305 * this.cantidadProductos;
+          console.log(this.productos);
+          console.log(this.cantidadProductos);
+          console.log(this.total_productos);
         }
+      );
     },
 
-    computed: {
-      mover (){
-        return {
-          transform: `translate(${this.contador_traslacion}px`
-        }
+    trasladar_derecha() {
+      console.log("derecha");
+
+      this.contador_traslacion = this.contador_traslacion - 1220;
+      console.log(this.contador_traslacion);
+      if (this.contador_traslacion <= -this.total_productos + 1220) {
+        this.contador_traslacion = -this.total_productos + 1220;
       }
     },
-    methods: {
 
-        infodelcamp () {
-            API.peticion('https://render-delcamp.onrender.com/productos')
-                .then(res => {
-                    this.productos = res
-                    for (let index = 0; index <= this.productos.length; index++) {
-                    this.cantidadProductos +=1
-                }
-                    this.total_productos = 305 * this.cantidadProductos
-                    console.log(this.productos);
-                    console.log(this.cantidadProductos);
-                    console.log(this.total_productos);
-
-                })
-        },
-
-
-        trasladar_derecha () {
-            console.log('derecha');
-
-              this.contador_traslacion = this.contador_traslacion - 1220;
-              console.log(this.contador_traslacion);
-          if (this.contador_traslacion <= (-this.total_productos + 1220)){
-           this.contador_traslacion =(-this.total_productos + 1220)
-          }
-        },
-
-        trasladar_izquierda ()  {
-            console.log('izquierda');
-            this.contador_traslacion = this.contador_traslacion + 1220;
-            console.log(this.contador_traslacion);
-          if (this.contador_traslacion >=  0) {
-            this.contador_traslacion=0
-          }
-        }
+    trasladar_izquierda() {
+      console.log("izquierda");
+      this.contador_traslacion = this.contador_traslacion + 1220;
+      console.log(this.contador_traslacion);
+      if (this.contador_traslacion >= 0) {
+        this.contador_traslacion = 0;
+      }
     },
 
-
-    mounted () {
-        this.infodelcamp()
+    Icon(id) {
+      console.log("Id de esa verdura..", id);
+      if (id) {
+        this.comprasContador++;
+        this.carrito.push(id);
+        console.log(this.carrito);
+      }
     }
-  }
+    
+  },
+
+  mounted() {
+    this.infodelcamp();
+  },
+};
 </script>
-<style>
+<style scoped>
 .father {
   display: flex;
 }
@@ -201,7 +217,7 @@ export default {
 
 .producto {
   width: 250px;
-  height: 400px;
+  height: 450px;
   background-color: white;
   border-radius: 20px;
   display: flex;
@@ -212,7 +228,7 @@ export default {
 }
 .foto_producto {
   width: 100%;
-  height: 60%;
+  height: 55%;
 }
 
 .foto_producto img {
@@ -222,16 +238,23 @@ export default {
 }
 
 .informacion_producto {
-  width: 100%;
-  height: 35%;
+  width: 90%;
+  height: 40%;
   font-size: 10px;
   padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: start;
+  justify-content:space-between;
+  align-items:center;
+  text-align:center;
 }
 
+.valores{
+  display:flex;
+  flex-direction:column;
+  justify-content: space-evenly;
+  align-items: center;
+}
 .informacion_producto button {
   width: 70%;
   height: 30px;
@@ -241,6 +264,7 @@ export default {
   color: white;
   border-radius: 5px;
   background-color: rgb(19, 174, 19);
+  cursor: pointer;
 }
 
 .descuento {

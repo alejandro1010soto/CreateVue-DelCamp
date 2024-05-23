@@ -1,19 +1,23 @@
 <template>
   <div id="app">
       <DelcampHeader/>
+      <landing-page/>
       <router-view/>
       <DelcampFooter/>
     
   </div>
 </template>
 <script>
-    import DelcampHeader from '../src/components/DelcampHeader.vue'
-    import DelcampFooter from '../src/components/DelcampFooter.vue'
+    
+    import LandingPage from '../src/components/Landing-page.vue';
+    
 export default {
   components: {
-        DelcampHeader,
-        DelcampFooter
-    }
+       
+        LandingPage,
+        
+    },
+
 }
 </script>
 <style>

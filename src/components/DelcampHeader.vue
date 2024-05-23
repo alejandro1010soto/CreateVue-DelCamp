@@ -1,14 +1,15 @@
 <template>
   <div>
+    
       <header>
       <div class="narvar">
           <ul>
               <a href=".//All-Productus/All_Products.html">Stack Products</a>
-              <a id="carritoIncremental" href=""></a>
               <a href="">Login/Register</a>
               <a href="">Campesino</a>
               <a href="">Campesinos - DelCamp</a>
               <i class="fa-solid fa-bars"></i>
+              <i class="fa-solid fa-cart-shopping fa-beat" style="color: #22511f;" v-if="ProductosComprados!=0" id="carrito"> <p>{{ ProductosComprados.length }}</p></i>
               <img id="IMAGENPROFILE" src="../assets/image/logo.png" class="img-thumbnail" alt="..." width="40px">
           </ul>
       </div>
@@ -19,7 +20,7 @@
           <div class="logo"><img src="../assets/image/logo.png" alt=""></div>
       </div>
       <div id="AdverCompra">
-
+        
       </div>
   </header>
   </div>
@@ -27,7 +28,17 @@
 
 <script>
 export default {
-
+    props: ['ProductosComprados'],
+    data (){
+        return {
+         CantidadProductos: null
+        }
+    },
+    
+    mounted () {
+        this.TotalProductos()
+       console.log('feo',this.ProductosComprados.length);
+    },
 }
 </script>
 <style scoped>
@@ -69,6 +80,17 @@ body{
     font-weight: 500; 
 }
 
+#carrito{
+position: relative;
+font-size: 25px;
+}
+#carrito p{
+position: absolute;
+top: 4px;
+font-size: 10px;
+left: 12px;
+color: white;
+}
 .narvar{
     width: 100%;
     height: 50px;
