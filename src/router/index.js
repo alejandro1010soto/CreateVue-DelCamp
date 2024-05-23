@@ -5,6 +5,7 @@ import helloword from '../components/HelloWorld.vue'
 import Login from '../components/Login.vue'
 import LoginFarmerVue from '@/components/Farmer/LoginFarmer.vue'
 import ProfileFarmer from '@/components/Farmer/ProfileFarmer.vue'
+import RegisterFarmer from '@/components/Farmer/RegisterFarmer'
 
 Vue.use(VueRouter)
 
@@ -22,9 +23,6 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
@@ -41,6 +39,11 @@ const routes = [
     path: '/ProfileFarmer',
     name: 'ProfileFarmer',
     component: ProfileFarmer
+  },
+  {
+    path: '/RegisterFarmer',
+    name: 'Register',
+    component: RegisterFarmer
   }
   
 ]
