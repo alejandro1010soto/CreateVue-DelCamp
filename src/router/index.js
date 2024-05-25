@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import helloword from '../components/HelloWorld.vue'
 import Login from '../components/Login.vue'
+import MainAndres from '../components/Pasarela/MainAndres.vue'
+import PasarelaAndres from '@/components/Pasarela/PasarelaAndres.vue'
 
 Vue.use(VueRouter)
 
@@ -29,8 +31,18 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/main',
+    name: 'main',
+    component: MainAndres
+  },
+  {
+    path: '/pasarela',
+    name: 'pasarela',
+    component: PasarelaAndres
   }
-]
+  ]
 
 const router = new VueRouter({
   mode: 'history',
