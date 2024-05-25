@@ -1,30 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import helloword from '../components/HelloWorld.vue'
+import DelcampHeader from '../components/DelcampHeader.vue'
+import DelcampFooter from '../components/DelcampFooter.vue'
+import LandingPage from '../components/Landing-page.vue'
 import Login from '../components/Login.vue'
-import MainAndres from '../components/Pasarela/MainAndres.vue'
-import PasarelaAndres from '@/components/Pasarela/PasarelaAndres.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: '/Landing-page',
+    name: 'Landing-page',
+    component: LandingPage
+
   },
   {
-    path: '/Helloword',
-    name: 'home',
-    component: helloword
+    path: '/Delcampfooter',
+    name: 'Delcampfooter',
+    component: DelcampFooter
+
+  },
+  {
+    path: '/DelcampHeader',
+    name: 'DelcampHeader',
+    component: DelcampHeader
   },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
@@ -33,16 +37,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/main',
-    name: 'main',
-    component: MainAndres
-  },
-  {
-    path: '/pasarela',
-    name: 'pasarela',
-    component: PasarelaAndres
-  }
-  ]
+
 
 const router = new VueRouter({
   mode: 'history',
