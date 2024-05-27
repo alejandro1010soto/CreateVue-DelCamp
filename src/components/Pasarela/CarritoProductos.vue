@@ -1,9 +1,9 @@
 <template>
     <div id="main-andres">
-        <body>
-    <i id="Back" class="fa-solid fa-circle-arrow-left"></i>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <!--<div class="modal-dialog">
+        <DelcampHeader/>
+     <i id="Back" class="fa-solid fa-circle-arrow-left"></i>
+     <!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
@@ -17,16 +17,10 @@
                     <button type="button" class="btn btn-primary" id="saveReload">Save changes</button>
                 </div>
             </div>
-        </div>-->
-    </div>
+        </div>
+    </div>-->
 
-
-    <header>
-        <h3>Stack Products</h3>
-        <a href="/Components/leanding_page.html">Inicio</a>
-        <img src="./..\img\treslineas.jpg">
-    </header>
-
+   
     <section class="first">
         <div class="imagen_carrusel">
             <img src="./..\img\Agro_-_colombia.png">
@@ -36,7 +30,8 @@
             <h1>Productos en proceso de compra</h1>
             <hr>
             <div id="tr_id4">
-
+                <!-- <a id="h" v-for="(item, index) in ProductosComprados" :key="index">
+                </a> -->
             </div>
         </div>
         <div class="programar_envio">
@@ -67,7 +62,7 @@
                     y tratamiento de datos de Delcamp
                 </h1>
             </div>
-            <button @click="openInNewTab('/profile')">Pagar</button>
+            <button>Pagar</button>
         </div>
     </section>
     <section class="second">
@@ -85,13 +80,22 @@
             </div>
         </div>
     </section>
-</body>
+<DelcampFooter/>
     </div>
 </template>
 
 <script>
+import DelcampHeader from "../DelcampHeader.vue";
+import DelcampFooter from "../DelcampFooter.vue";
+
 export default{      
-    name:'MainAndres'
+    name:'CarritoProductos',
+    props: ['ProductosComprados'],
+    components:{
+        DelcampHeader,
+        DelcampFooter
+    },   
+   
  
    /* let urlParams = new URLSearchParams(window.location.search);
 let idProducts = urlParams.getAll('idproduct').flatMap(id => id.split(','));
@@ -169,43 +173,11 @@ idProducts.forEach(idP => {
       `;
   }
 }),*/
-
-
-
-
-
-
-
-
-
-
 }
 </script>
 
 <style scoped>
-    body{
-    margin: 0px;
-    padding:0px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-header{
-    background-color: rgb(255, 255, 255);
-    width:100%; 
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-header > img{
-    width:2%;
-    height: 5%;
-    margin-top:4px;
-    margin-right: 25px;
-}
-header > h3{
-    margin: 0px 55px 0px 45px 
-}
+
 .first{
     background-color: green;
     width: 100%;

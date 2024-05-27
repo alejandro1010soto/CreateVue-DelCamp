@@ -4,11 +4,16 @@ import DelcampHeader from '../components/DelcampHeader.vue'
 import DelcampFooter from '../components/DelcampFooter.vue'
 import LandingPage from '../components/Landing-page.vue'
 import Login from '../components/Login.vue'
+import CarritoProductos from '../components/Pasarela/CarritoProductos.vue'
 
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    redirect:'/Landing-page'
+  },
   {
     path: '/Landing-page',
     name: 'Landing-page',
@@ -37,6 +42,11 @@ const routes = [
     component: Login
   },
   {
+    path: '/CarritoProductos',
+    name: 'CarritoProductos',
+    component: CarritoProductos
+  }
+]
 
 
 const router = new VueRouter({

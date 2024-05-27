@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-
+    <router-view></router-view>
   </div>
 </template>
 <script>
     
-    import LandingPage from '../src/components/Landing-page.vue';
+
     
 export default {
-  components: {
-       
-        LandingPage,
-        
-    },
-
+    name: 'App',
+    mounted() {
+    if (this.$route.path === '/') {
+      this.$router.replace({ name: 'Landing-page' });
+    }
+  }
 }
 </script>
 <style>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    
       <header>
       <div class="narvar">
           <ul>
@@ -9,7 +8,7 @@
               <a href="">Campesino</a>
               <a href="">Campesinos - DelCamp</a>
               <i class="fa-solid fa-bars"></i>
-              <i class="fa-solid fa-cart-shopping fa-beat" style="color: #22511f;" v-if="ProductosComprados!=0" id="carrito"> <p>{{ ProductosComprados.length }}</p></i>
+              <i class="fa-solid fa-cart-shopping fa-beat" @click="carritolleno" style="color: #22511f;" v-if="ProductosComprados!=0" id="carrito"> <p>{{ ProductosComprados.length }}</p></i>
               <img id="IMAGENPROFILE" src="../assets/image/logo.png" class="img-thumbnail" alt="..." width="40px">
           </ul>
       </div>
@@ -27,23 +26,31 @@
 </template>
 
 <script>
+import CarritoProductos from './Pasarela/CarritoProductos.vue'
 export default {
+    CarritoProductos,
     props: ['ProductosComprados'],
     data (){
         return {
-         CantidadProductos: null
+         CantidadProductos: null,
+        }
+    },
+    methods:{
+        carritolleno(){
+            this.$router.push({ name: 'CarritoProductos'})
         }
     },
     
     mounted () {
-        this.TotalProductos()
-       console.log('feo',this.ProductosComprados.length);
+       console.log('feo',this.ProductosComprados);
+      
     },
+   
 }
 </script>
 <style scoped>
 *{
-    padding: 0;
+    padding: 0; 
     margin: 0;
     box-sizing: border-box;
 }
