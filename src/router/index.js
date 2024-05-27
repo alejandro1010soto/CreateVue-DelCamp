@@ -4,31 +4,22 @@ import DelcampHeader from '../components/DelcampHeader.vue'
 import DelcampFooter from '../components/DelcampFooter.vue'
 import LandingPage from '../components/Landing-page.vue'
 import Login from '../components/Login.vue'
-import CarritoProductos from '../components/Pasarela/CarritoProductos.vue'
 
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    redirect:'/Landing-page'
-  },
-  {
-    path: '/Landing-page',
-    name: 'Landing-page',
     component: LandingPage
-
   },
   {
-    path: '/Delcampfooter',
-    name: 'Delcampfooter',
+    path: '/delcamp-footer',
+    name: 'delcamp-footer',
     component: DelcampFooter
-
   },
   {
-    path: '/DelcampHeader',
-    name: 'DelcampHeader',
+    path: '/delcamp-header',
+    name: 'delcamp-header',
     component: DelcampHeader
   },
   {
@@ -42,9 +33,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/CarritoProductos',
-    name: 'CarritoProductos',
-    component: CarritoProductos
+
   }
 ]
 
