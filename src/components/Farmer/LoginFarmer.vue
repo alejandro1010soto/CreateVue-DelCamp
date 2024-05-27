@@ -17,7 +17,7 @@
         <input class="user-password" type="password" id="campoContraseña" placeholder="********" v-model="password" required>
 
         <button class="btn-register" type="submit">Iniciar Sesión</button>
-        <router-link to="/RegisterFarmer">¿No tienes cuenta?</router-link>
+        <router-link to="/Register-Farmer">¿No tienes cuenta?</router-link>
         <p>Olvidaste tu contraseña? <a href="#">Recuperar Contraseña</a></p>
         <p id="TrueFormulario"></p>
       </form>

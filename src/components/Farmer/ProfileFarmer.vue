@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click.prevent  ="toggleNodal">¿Agregar Productos?</button>
+    <button @click.prevent="toggleNodal">¿Agregar Productos?</button>
     <p>Profile User</p>
     <p>Nombre de la finca: {{ farmName }}</p>
     <p>Ubicacion de la finca: {{ ubication }}</p>
@@ -47,6 +47,8 @@ export default {
   methods: {
     showProfile() {
       let id = new URLSearchParams(window.location.search).get('IdActually');
+      console.warn(id);
+
       if (id) {
         API.peticion(`https://render-delcamp.onrender.com/campesinos/${id}`)
           .then((response) => {
