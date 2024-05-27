@@ -2,7 +2,6 @@
   <div>
     <DelcampHeader :ProductosComprados="carrito" />
     <div id="Reload_Noult_Api"></div>
-
     <section class="contenedor_ofertas">
       <h1>Productos Disponibles</h1>
       <hr class="lineaPRODUC" />
@@ -94,11 +93,9 @@
 import DelcampHeader from "./DelcampHeader.vue";
 import DelcampFooter from "./DelcampFooter.vue";
 import API from "@/api";
+
 export default {
-  components: {
-    DelcampHeader,
-    DelcampFooter
-  },
+
   data() {
     return {
       pdf: "/productos/Producto_Delcamp.pdf",
@@ -368,5 +365,8 @@ export default {
 .InfoDelcamp div:hover {
   background-color: #8a8a8a3e;
   transform: scale(1.1);
+}
+.atencion img{
+  width: 100%;
 }
 </style>

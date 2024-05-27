@@ -4,16 +4,12 @@ import DelcampHeader from '../components/DelcampHeader.vue'
 import DelcampFooter from '../components/DelcampFooter.vue'
 import LandingPage from '../components/Landing-page.vue'
 import Login from '../components/Login.vue'
-import LoginFarmerVue from '@/components/Farmer/LoginFarmer.vue'
-import ProfileFarmer from '@/components/Farmer/ProfileFarmer.vue'
-import RegisterFarmer from '@/components/Farmer/RegisterFarmer.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/landing-page',
-    name: 'landing-page',
     component: LandingPage
   },
   {
@@ -37,21 +33,10 @@ const routes = [
     component: Login
   },
   {
-    path: '/login-farmer',
-    name: 'login-farmer',
-    component: LoginFarmerVue
-  },
-  {
-    path: '/profile-farmer',
-    name: 'profile-farmer',
-    component: ProfileFarmer
-  },
-  {
-    path: '/register-farmer',
-    name: 'register-farmer',
-    component: RegisterFarmer
+
   }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',
