@@ -37,8 +37,8 @@
       <div class="content-button">
         <button type="submit">Registrar</button>
       </div>
-      <div class="MesaggeValidation">
-        <p>{{MSGvalidation}}</p>
+      <div class="message-validation" v-if="MSGvalidation">
+        <p>{{ MSGvalidation }}</p>
       </div>
     </form>
   </div>
@@ -58,7 +58,6 @@ export default {
       descripcion: '',
       password: '',
       imagenPerfil: null,
-      // Validation User
       MSGvalidation: '',
     };
   },
@@ -82,7 +81,7 @@ export default {
       API.enviar('https://render-delcamp.onrender.com/campesinos', ObjectData)
         .then((response) => {
           console.log('Campesino registrado:', response);
-          this.MSGvalidation = `Hola ${response.nombre} tu registro fue exitoso!!`;
+          this.MSGvalidation = `Hola ${response.nombre}, tu registro fue exitoso!!`;
           // Resetear el formulario
           this.nombre = '';
           this.correo = '';
@@ -100,6 +99,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .registro-campesino {
