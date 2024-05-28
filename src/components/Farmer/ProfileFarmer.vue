@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click.prevent  ="toggleNodal">¿Agregar Productos?</button>
+    <button @click.prevent="toggleNodal">¿Agregar Productos?</button>
     <p>Profile User</p>
     <p>Nombre de la finca: {{ farmName }}</p>
     <p>Ubicacion de la finca: {{ ubication }}</p>
@@ -17,6 +17,8 @@
 
     <div :class="{'nodal-pop': isNodalVisible, 'nodal-invisible': !isNodalVisible}" class="pop-nodal">
       <div class="nodal">
+        <label for="">Imagen del producto</label>
+        <input type="file" >
         <label for="">Nombre de Productos</label>
         <input type="text" placeholder="Nombre del Producto">
         <label for="">Descripcion del Producto</label>
@@ -47,6 +49,7 @@ export default {
   methods: {
     showProfile() {
       let id = new URLSearchParams(window.location.search).get('IdActually');
+
       if (id) {
         API.peticion(`https://render-delcamp.onrender.com/campesinos/${id}`)
           .then((response) => {
@@ -85,6 +88,7 @@ export default {
   }
 }
 </script>
+
 <style>
 .imagenProduct {
   width: 200px;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DelcampHeader :ProductosComprados="carrito"/>
+    <DelcampHeader :ProductosComprados="carrito" />
     <div id="Reload_Noult_Api"></div>
 
     <section class="contenedor_ofertas">
@@ -9,11 +9,16 @@
       <div class="ofertas">
         <div class="father" :style="mover">
           <div class="producto" v-for="(item, index) in productos" :key="index">
-            <div class="descuento"><p>45% DTO.</p></div>
-            <div class="foto_producto"><img :src="item.foto" alt="" /></div>
+            <div class="descuento">
+              <p>45% DTO.</p>
+            </div>
+
+            <div class="foto_producto">
+              <img :src="item.foto" alt="fd" />
+            </div>
             <div class="informacion_producto">
               <div class="valores">
-                <h4 class="PrecioProducto">
+                <h4 class="PrecioProducto"> 
                   <b>${{ item.precio }} COL</b>
                 </h4>
                 <br />
@@ -36,8 +41,7 @@
     </section>
     <section class="lista_productos">
       <img src="../assets/image/lista_productos.png" alt="" />
-      <a :href="pdf" target="_blank"
-        ><button>Ver listado de productos</button></a>
+      <a :href="pdf" target="_blank"><button>Ver listado de productos</button></a>
     </section>
     <section class="InfoDelcamp">
       <div class="mision">
@@ -58,9 +62,7 @@
           <h2 class="titulo"><b>Visión de DelCamp</b></h2>
           <p>
             Convertirnos en la principal <b>fuente</b> de cambio, transformando
-            el mercado agrícola colombiano hacia la <b>transparencia</b>,<b
-              >eficiencia</b
-            >
+            el mercado agrícola colombiano hacia la <b>transparencia</b>,<b>eficiencia</b>
             y <b>equidad</b> para todos los participantes, cultivando un
             <b>futuro</b> próspero y sostenible.
           </p>
@@ -84,7 +86,7 @@
     <section class="atencion">
       <img src="../assets/image/atencion.jpg" alt="" />
     </section>
-    <DelcampFooter/>
+    <DelcampFooter />
   </div>
 </template>
 
@@ -93,10 +95,10 @@ import DelcampHeader from "./DelcampHeader.vue";
 import DelcampFooter from "./DelcampFooter.vue";
 import API from "@/api";
 export default {
- components: {
-  DelcampHeader,
-  DelcampFooter
- },
+  components: {
+    DelcampHeader,
+    DelcampFooter
+  },
   data() {
     return {
       pdf: "/productos/Producto_Delcamp.pdf",
@@ -111,55 +113,51 @@ export default {
   computed: {
     mover() {
       return {
-        transform: `translate(${this.contador_traslacion}px`,
+        transform: `translate(${this.contador_traslacion}px)`,
       };
     },
   },
-  
+
   methods: {
-    infodelcamp() {
-      API.peticion("https://render-delcamp.onrender.com/productos").then(
-        (res) => {
-          this.productos = res;
-          for (let index = 0; index <= this.productos.length; index++) {
-            this.cantidadProductos += 1;
-          }
-          this.total_productos = 305 * this.cantidadProductos;
-          console.log(this.productos);
-          console.log(this.cantidadProductos);
-          console.log(this.total_productos);
-        }
-      );
+    async infodelcamp() {
+      try {
+        const res = await API.peticion("https://render-delcamp.onrender.com/productos");
+        this.productos = res;
+        this.cantidadProductos = this.productos.length;
+        this.total_productos = 305 * this.cantidadProductos;
+        console.log(this.productos);
+        console.log(this.cantidadProductos);
+        console.log(this.total_productos);
+      } catch (error) {
+        console.error(error);
+      }
     },
 
     trasladar_derecha() {
       console.log("derecha");
-
-      this.contador_traslacion = this.contador_traslacion - 1220;
-      console.log(this.contador_traslacion);
+      this.contador_traslacion -= 1220;
       if (this.contador_traslacion <= -this.total_productos + 1220) {
         this.contador_traslacion = -this.total_productos + 1220;
       }
+      console.log(this.contador_traslacion);
     },
 
     trasladar_izquierda() {
       console.log("izquierda");
-      this.contador_traslacion = this.contador_traslacion + 1220;
-      console.log(this.contador_traslacion);
+      this.contador_traslacion += 1220;
       if (this.contador_traslacion >= 0) {
         this.contador_traslacion = 0;
       }
+      console.log(this.contador_traslacion);
     },
 
     Icon(id) {
       console.log("Id de esa verdura..", id);
       if (id) {
-        this.comprasContador++;
         this.carrito.push(id);
         console.log(this.carrito);
       }
     }
-    
   },
 
   mounted() {
@@ -167,10 +165,12 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .father {
   display: flex;
 }
+
 .contenedor_ofertas {
   width: auto;
   height: 55%;
@@ -181,9 +181,11 @@ export default {
   align-items: center;
   overflow: hidden;
 }
-.contenedor_ofertas > h1 {
+
+.contenedor_ofertas>h1 {
   font-size: 45px;
 }
+
 .traslacion {
   display: flex;
   justify-content: center;
@@ -226,6 +228,7 @@ export default {
   transition: 0.4s ease;
   margin: 10px;
 }
+
 .foto_producto {
   width: 100%;
   height: 55%;
@@ -244,17 +247,18 @@ export default {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content:space-between;
-  align-items:center;
-  text-align:center;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
 
-.valores{
-  display:flex;
-  flex-direction:column;
+.valores {
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
+
 .informacion_producto button {
   width: 70%;
   height: 30px;
@@ -303,6 +307,7 @@ export default {
 .lista_productos img {
   width: 100%;
 }
+
 .lista_productos button {
   width: 200px;
   height: 40px;

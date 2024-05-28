@@ -37,7 +37,7 @@ const ValidationUser = function(URL, parameters, router) {
                     let IdActuallyFound = user.id;
                     console.log(IdActuallyFound);
                     try {
-                        router.push('/ProfileFarmer?IdActually=' + IdActuallyFound);
+                        router.push('/profile-farmer?IdActually=' + IdActuallyFound);
                         resolve(true);
                     } catch (error) {
                         console.error("Error during navigation:", error);
