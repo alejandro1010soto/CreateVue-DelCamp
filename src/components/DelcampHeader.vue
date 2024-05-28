@@ -1,21 +1,56 @@
 <template>
+    <div>
+        <header>
+            <div class="narvar">
+                <ul id="app">
+                    <router-link to="/">Home</router-link>
+                    <router-link to="/login">Acceder - Registrar</router-link>
+                    <router-link to="/loginFarmer">Campesino</router-link>
+                    <i class="fa-solid fa-bars"></i>
+                    <i class="fa-solid fa-cart-shopping fa-beat" style="color: #22511f;" v-if="ProductosComprados != 0"
+                        id="carrito">
+                        <p>{{ ProductosComprados.length }}</p>
+                    </i>
+                    <img id="IMAGENPROFILE" src="../assets/image/logo.png" class="img-thumbnail" alt="..." width="40px">
+                </ul>
+                <router-view />
 
+            </div>
+            <div class="container_carrusel_leading_page">
+                <div class="carrusel_leanding_page">
+                    <div><img src="../assets/image/Banner.png" alt=""></div>
+                </div>
+                <div class="logo"><img src="../assets/image/logo.png" alt=""></div>
+            </div>
+            <div id="AdverCompra">
+
+            </div>
+        </header>
+    </div>
 </template>
 
 <script>
-import CarritoProductos from './Pasarela/CarritoProductos.vue'
 export default {
-    CarritoProductos,
     props: ['ProductosComprados'],
     data() {
         return {
-
+            CantidadProductos: null
+        }
     },
-   
+
+    mounted() {
+        this.TotalProductos()
+        console.log('feo', this.ProductosComprados.length);
+    },
 }
 </script>
 <style scoped>
+nav a.router-link-exact-active {
+    color: #42b983;
+}
 
+* {
+    padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
